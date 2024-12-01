@@ -7,6 +7,7 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, Float, Stars } from '@react-three/drei'
 import * as THREE from 'three'
 import { Button } from '@/components/ui/button'
+import { Typewriter } from 'react-simple-typewriter'
 
 function AnimatedBox() {
   const meshRef = useRef<THREE.Mesh>(null)
@@ -131,12 +132,28 @@ export function HeroSection() {
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="mb-6 text-4xl font-bold text-gray-900 dark:text-white sm:text-6xl lg:text-7xl">
               <span className="bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-500 bg-clip-text text-transparent">
-                Code Showcase
+                <Typewriter
+                  words={['Code Showcase']}
+                  loop={1}
+                  cursor
+                  cursorStyle="_"
+                  typeSpeed={70}
+                  deleteSpeed={50}
+                />
               </span>
             </h1>
             <p className="mb-8 text-lg text-gray-700 dark:text-gray-300 sm:text-xl lg:text-2xl">
-              A beautiful collection of code snippets and programs.
-              Browse, search, and copy code with ease.
+              <Typewriter
+                words={[
+                  'A beautiful collection of code snippets and programs.',
+                  'Browse, search, and copy code with ease.',
+                ]}
+                loop={1}
+                cursor
+                cursorStyle="_"
+                typeSpeed={50}
+                deleteSpeed={30}
+              />
             </p>
             <div className="mb-12 flex justify-center space-x-4">
               <Button
