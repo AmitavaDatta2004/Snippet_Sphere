@@ -11,6 +11,8 @@ export type Language =
 
 // Available tags for categorizing snippets
 export type Tag =
+  | 'algorithm'
+  | 'data-structure'
   // Algorithm categories
   | 'sorting'
   | 'searching'
@@ -20,7 +22,7 @@ export type Tag =
   | 'recursion'
   | 'backtracking'
   | 'divide-and-conquer'
-  
+
   // Data Structures
   | 'array'
   | 'linked-list'
@@ -34,7 +36,7 @@ export type Tag =
   | 'graph'
   | 'trie'
   | 'segment-tree'
-  
+
   // Problem Types
   | 'string'
   | 'math'
@@ -43,12 +45,12 @@ export type Tag =
   | 'simulation'
   | 'two-pointers'
   | 'sliding-window'
-  
+
   // Difficulty Levels
   | 'beginner'
   | 'intermediate'
   | 'advanced'
-  
+
   // Application Areas
   | 'web'
   | 'database'
@@ -57,7 +59,7 @@ export type Tag =
   | 'machine-learning'
   | 'data-science'
   | 'system-design'
-  
+
   // Educational
   | 'tutorial'
   | 'example'
@@ -66,13 +68,19 @@ export type Tag =
   | 'leetcode'
   | 'hackerrank'
   | 'project-euler'
-  
+
   // Utilities
   | 'helper'
   | 'utility'
   | 'debugging'
   | 'testing'
-  | 'optimization';
+  | 'optimization'
+  
+  
+  |'data-manipulation'
+  |'css'
+  |'design'
+  |'error-handling';
 
 export interface CodeSnippet {
   id: string;

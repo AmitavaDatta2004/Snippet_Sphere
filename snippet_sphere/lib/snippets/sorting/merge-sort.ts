@@ -30,7 +30,7 @@ def merge(left, right):
     result.extend(left[i:])
     result.extend(right[j:])
     return result`,
-  tags: ['sorting', 'algorithm', 'python'],
+  tags: ['sorting', 'algorithm'],
   author: {
     name: 'Amitava Datta',
     github: 'https://github.com/amitavadatta',

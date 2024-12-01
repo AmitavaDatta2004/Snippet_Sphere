@@ -13,7 +13,7 @@ export const quickSort: CodeSnippet = {
     middle = [x for x in arr if x == pivot]
     right = [x for x in arr if x > pivot]
     return quick_sort(left) + middle + quick_sort(right)`,
-  tags: ['sorting', 'algorithm', 'python'],
+  tags: ['sorting', 'algorithm'],
   author: {
     name: 'Pranay De',
     github: 'https://github.com/pranayde',

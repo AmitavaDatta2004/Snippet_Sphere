@@ -40,7 +40,7 @@ int main() {
         std::cout << arr[i] << " ";
     return 0;
 }`,
-  tags: ['sorting', 'algorithm', 'advanced', 'template'],
+  tags: ['sorting', 'algorithm', 'advanced'],
   author: {
     name: 'Amitava Datta',
     github: 'https://github.com/amitavadatta',
