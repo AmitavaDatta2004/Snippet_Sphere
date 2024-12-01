@@ -45,6 +45,6 @@ userCache.set('user1', { id: 1, name: 'John' });`,
   tags: ['utility', 'advanced', 'data-structure'],
   author: {
     name: 'Amitava Datta',
-    github: 'https://github.com/amitavadatta',
+    github: 'https://github.com/AmitavaDatta2004',
   },
 };

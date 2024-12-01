@@ -43,6 +43,6 @@ int main() {
   tags: ['sorting', 'algorithm', 'advanced'],
   author: {
     name: 'Amitava Datta',
-    github: 'https://github.com/amitavadatta',
+    github: 'https://github.com/AmitavaDatta2004',
   },
 };

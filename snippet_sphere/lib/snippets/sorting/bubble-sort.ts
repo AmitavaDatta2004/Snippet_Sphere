@@ -38,6 +38,6 @@ export const bubbleSort: CodeSnippet = {
   ],
   author: {
     name: 'Amitava Datta',
-    github: 'https://github.com/amitavadatta',
+    github: 'https://github.com/AmitavaDatta2004',
   },
 };

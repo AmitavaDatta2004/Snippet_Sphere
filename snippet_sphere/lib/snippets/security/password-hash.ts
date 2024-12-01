@@ -29,6 +29,6 @@ async function verifyPassword(password, hash) {
   tags: ['security', 'web', 'utility', 'intermediate'],
   author: {
     name: 'Amitava Datta',
-    github: 'https://github.com/amitavadatta',
+    github: 'https://github.com/AmitavaDatta2004',
   },
 };

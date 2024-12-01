@@ -33,6 +33,6 @@ def merge(left, right):
   tags: ['sorting', 'algorithm'],
   author: {
     name: 'Amitava Datta',
-    github: 'https://github.com/amitavadatta',
+    github: 'https://github.com/AmitavaDatta2004',
   },
 };
