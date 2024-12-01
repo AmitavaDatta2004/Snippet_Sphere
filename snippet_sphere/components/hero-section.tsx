@@ -75,14 +75,26 @@ function FloatingCubes() {
   )
 }
 
-function Typewriter({ words, loop = true, typingSpeed = 150, deletingSpeed = 100, delayBetweenWords = 1000 }) {
+function Typewriter({
+  words,
+  loop = true,
+  typingSpeed = 150,
+  deletingSpeed = 100,
+  delayBetweenWords = 1000,
+}: {
+  words: string[]
+  loop?: boolean
+  typingSpeed?: number
+  deletingSpeed?: number
+  delayBetweenWords?: number
+}) {
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
   const [currentText, setCurrentText] = useState('')
   const [isDeleting, setIsDeleting] = useState(false)
   const [isWaiting, setIsWaiting] = useState(false)
 
   useEffect(() => {
-    let timeout
+    let timeout: NodeJS.Timeout;
 
     const type = () => {
       const currentWord = words[currentWordIndex]
@@ -149,7 +161,25 @@ const creators = [
   },
 ]
 
-function DeveloperCard({ creator, index }) {
+
+type Creator = {
+  name: string
+  role: string
+  github: string
+  linkedin: string
+  avatar: string
+  bio: string
+  skills: string[]
+  mail: string
+};
+
+function DeveloperCard({
+  creator,
+  index,
+}: {
+  creator: Creator
+  index: number
+}) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
