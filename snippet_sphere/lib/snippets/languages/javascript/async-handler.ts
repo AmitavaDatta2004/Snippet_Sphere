@@ -25,6 +25,6 @@ app.get('/api/users', asyncHandler(async (req, res) => {
   tags: ['web', 'utility', 'error-handling', 'intermediate'],
   author: {
     name: 'Pranay De',
-    github: 'https://github.com/pranayde',
+    github: 'https://github.com/PRANAY130',
   },
 };

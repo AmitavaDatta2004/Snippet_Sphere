@@ -52,6 +52,6 @@ export const binaryTree: CodeSnippet = {
   tags: ['data-structure', 'tree', 'binary-tree', 'intermediate'],
   author: {
     name: 'Pranay De',
-    github: 'https://github.com/pranayde',
+    github: 'https://github.com/PRANAY130',
   },
 };

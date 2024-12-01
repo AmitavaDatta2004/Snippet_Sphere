@@ -25,6 +25,6 @@ export const twoSum: CodeSnippet = {
   tags: ['array', 'leetcode', 'interview', 'beginner'],
   author: {
     name: 'Pranay De',
-    github: 'https://github.com/pranayde',
+    github: 'https://github.com/PRANAY130',
   },
 };

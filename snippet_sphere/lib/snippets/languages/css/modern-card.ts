@@ -63,6 +63,6 @@ export const modernCard: CodeSnippet = {
   tags: ['web', 'css', 'design', 'beginner'],
   author: {
     name: 'Pranay De',
-    github: 'https://github.com/pranayde',
+    github: 'https://github.com/PRANAY130',
   },
 };

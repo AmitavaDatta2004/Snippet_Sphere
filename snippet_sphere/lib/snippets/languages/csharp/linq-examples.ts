@@ -40,6 +40,6 @@ export const linqExamples: CodeSnippet = {
   tags: ['utility', 'intermediate', 'data-manipulation'],
   author: {
     name: 'Pranay De',
-    github: 'https://github.com/pranayde',
+    github: 'https://github.com/PRANAY130',
   },
 };
