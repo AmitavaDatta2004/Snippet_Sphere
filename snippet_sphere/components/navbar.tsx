@@ -40,20 +40,22 @@ export function Navbar() {
   }, [])
 
   return (
-    <header className={cn(
-      "sticky top-0 z-50 w-full transition-all duration-300",
-      isScrolled
-        ? "bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-md"
-        : "bg-transparent"
-    )}>
-      <div className="container flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center space-x-2 text-primary hover:text-primary/80 transition-colors">
-          <Code2 className="h-6 w-6" />
-          <span className="hidden font-bold sm:inline-block">
-            Code Showcase
+    <header
+      className={cn(
+        "sticky top-0 z-50 w-full transition-all duration-300",
+        isScrolled
+          ? "bg-gradient-to-r from-purple-100 via-pink-100 to-blue-100 dark:from-purple-600 dark:via-pink-600 dark:to-blue-600 shadow-lg"
+          : "bg-transparent"
+      )}
+    >
+      <div className="container flex h-20 items-center justify-between px-4">
+        <Link href="/" className="flex items-center space-x-2 text-gray-800 dark:text-white hover:text-purple-600 dark:hover:text-yellow-300 transition-colors">
+          <Code2 className="h-8 w-8 animate-pulse" />
+          <span className="hidden font-bold text-xl sm:inline-block bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 dark:from-yellow-400 dark:to-orange-500">
+            Snippet Sphere
           </span>
         </Link>
-        <nav className="hidden md:flex flex-1 items-center justify-center space-x-6 text-sm font-medium">
+        <nav className="hidden md:flex flex-1 items-center justify-center space-x-8 text-sm font-medium">
           {routes.map((route) => {
             const Icon = route.icon
             return (
@@ -61,13 +63,13 @@ export function Navbar() {
                 key={route.href}
                 href={route.href}
                 className={cn(
-                  'flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors relative group',
-                  pathname === route.href && 'text-primary font-semibold'
+                  'flex items-center space-x-2 text-gray-700 dark:text-white hover:text-purple-600 dark:hover:text-yellow-300 transition-colors relative group',
+                  pathname === route.href && 'text-purple-600 dark:text-yellow-300 font-semibold'
                 )}
               >
-                <Icon className="h-4 w-4" />
-                <span>{route.label}</span>
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                <Icon className="h-5 w-5" />
+                <span className="tracking-wide">{route.label}</span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-600 dark:bg-yellow-300 transition-all group-hover:w-full"></span>
               </Link>
             )
           })}
@@ -76,7 +78,8 @@ export function Navbar() {
           <ThemeToggle />
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-primary hover:text-primary/80 transition-colors"
+            className="md:hidden text-gray-800 dark:text-white hover:text-purple-600 dark:hover:text-yellow-300 transition-colors"
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
           >
             {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
@@ -84,7 +87,7 @@ export function Navbar() {
       </div>
       {isMobileMenuOpen && (
         <div className="md:hidden">
-          <nav className="flex flex-col items-center space-y-4 py-4 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+          <nav className="flex flex-col items-center space-y-4 py-6 bg-gradient-to-b from-purple-100 via-pink-100 to-blue-100 dark:from-purple-600 dark:via-pink-600 dark:to-blue-600">
             {routes.map((route) => {
               const Icon = route.icon
               return (
@@ -92,13 +95,13 @@ export function Navbar() {
                   key={route.href}
                   href={route.href}
                   className={cn(
-                    'flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors',
-                    pathname === route.href && 'text-primary font-semibold'
+                    'flex items-center space-x-2 text-gray-700 dark:text-white hover:text-purple-600 dark:hover:text-yellow-300 transition-colors',
+                    pathname === route.href && 'text-purple-600 dark:text-yellow-300 font-semibold'
                   )}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  <Icon className="h-4 w-4" />
-                  <span>{route.label}</span>
+                  <Icon className="h-5 w-5" />
+                  <span className="text-lg">{route.label}</span>
                 </Link>
               )
             })}
