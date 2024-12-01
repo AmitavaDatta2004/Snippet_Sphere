@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { snippets } from '@/lib/snippets';
 import { Input } from '@/components/ui/input';
 import { SearchIcon, Code2, Github, Plus } from 'lucide-react';
-import * as elasticlunr from 'elasticlunr';
+// import * as elasticlunr from 'elasticlunr';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import hljs from 'highlight.js';
@@ -17,6 +17,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from '@/components/ui/button';
+import elasticlunr from 'elasticlunr';
+
 
 export default function SearchPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -41,13 +43,33 @@ export default function SearchPage() {
     'competitive',
   ];
 
+  type Tag =
+  | 'sorting'
+  | 'searching'
+  | 'graph'
+  | 'dynamic-programming'
+  | 'greedy'
+  | 'array'
+  | 'linked-list'
+  | 'stack'
+  | 'queue'
+  | 'tree'
+  | 'web'
+  | 'machine-learning'
+  | 'security'
+  | 'leetcode'
+  | 'hackerrank'
+  | 'competitive-programming';
+
+
   useEffect(() => {
-    const index = elasticlunr(function () {
+    const index = elasticlunr(function (this: elasticlunr.Index<any>) {
       this.addField('title');
       this.addField('description');
       this.addField('tags');
       this.setRef('id');
     });
+    
 
     snippets.forEach((snippet) => {
       index.addDoc({
@@ -68,8 +90,8 @@ export default function SearchPage() {
 
   useEffect(() => {
     document.querySelectorAll('pre code').forEach((block) => {
-      hljs.highlightBlock(block);
-    });
+      hljs.highlightBlock(block as HTMLElement);
+    });    
   }, [searchResults]);
 
   useEffect(() => {
@@ -92,15 +114,15 @@ export default function SearchPage() {
     }
 
     if (selectedTag !== 'all') {
-      filteredResults = filteredResults.filter(s => s.tags.includes(selectedTag));
+      filteredResults = filteredResults.filter(s => s.tags.includes(selectedTag as Tag));
     }
 
     if (selectedDifficulty !== 'all') {
-      filteredResults = filteredResults.filter(s => s.tags.includes(selectedDifficulty));
+      filteredResults = filteredResults.filter(s => s.tags.includes(selectedDifficulty as Tag));
     }
 
     if (selectedCategory !== 'all') {
-      filteredResults = filteredResults.filter(s => s.tags.includes(selectedCategory));
+      filteredResults = filteredResults.filter(s => s.tags.includes(selectedCategory as Tag));
     }
 
     setSearchResults(filteredResults);
