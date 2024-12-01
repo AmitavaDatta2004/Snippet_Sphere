@@ -7,6 +7,33 @@ import hljs from 'highlight.js';
 import 'highlight.js/styles/github-dark.css';
 import { useEffect, useState } from 'react';
 
+type Tag =
+  | 'sorting'
+  | 'searching'
+  | 'graph'
+  | 'dynamic-programming'
+  | 'greedy'
+  | 'array'
+  | 'linked-list'
+  | 'stack'
+  | 'queue'
+  | 'tree'
+  | 'web'
+  | 'machine-learning'
+  | 'security'
+  | 'leetcode'
+  | 'hackerrank'
+  | 'competitive-programming';
+
+interface Snippet {
+  id: string;
+  title: string;
+  language: string;
+  description: string;
+  code: string;
+  tags: Tag[]; // Ensure tags match the Tag type
+  author: { name: string };
+}
 interface Category {
   name: string;
   icon: JSX.Element;
@@ -37,7 +64,7 @@ function SnippetCard({ snippet, categoryIndex, snippetIndex }: SnippetCardProps)
       transition={{ delay: (categoryIndex + snippetIndex) * 0.1 }}
     >
       <div className="group rounded-lg border bg-card/50 p-4 transition-all hover:bg-accent">
-        <div 
+        <div
           className="flex cursor-pointer items-center justify-between"
           onClick={() => setIsExpanded(!isExpanded)}
         >
@@ -102,7 +129,9 @@ export default function ListPage() {
       name: 'Algorithms',
       icon: <Code2 className="h-5 w-5" />,
       snippets: snippets.filter((s) => 
-        ['sorting', 'searching', 'graph', 'dynamic-programming', 'greedy'].some(tag => s.tags.includes(tag))
+        ['sorting', 'searching', 'graph', 'dynamic-programming', 'greedy'].some((tag) => 
+          s.tags.includes(tag as Tag) // Ensure tag is treated as a 'Tag'
+        )
       ),
       gradient: 'from-blue-500 to-cyan-500',
       description: 'Collection of algorithm implementations and problem solutions',
@@ -111,7 +140,9 @@ export default function ListPage() {
       name: 'Data Structures',
       icon: <Code2 className="h-5 w-5" />,
       snippets: snippets.filter((s) => 
-        ['array', 'linked-list', 'stack', 'queue', 'tree', 'graph'].some(tag => s.tags.includes(tag))
+        ['array', 'linked-list', 'stack', 'queue', 'tree', 'graph'].some((tag) => 
+          s.tags.includes(tag as Tag)
+        )
       ),
       gradient: 'from-purple-500 to-pink-500',
       description: 'Implementation of various data structures',
@@ -119,21 +150,21 @@ export default function ListPage() {
     {
       name: 'Web Development',
       icon: <Code2 className="h-5 w-5" />,
-      snippets: snippets.filter((s) => s.tags.includes('web')),
+      snippets: snippets.filter((s) => s.tags.includes('web' as Tag)),
       gradient: 'from-green-500 to-emerald-500',
       description: 'Web development utilities and components',
     },
     {
       name: 'Machine Learning',
       icon: <Code2 className="h-5 w-5" />,
-      snippets: snippets.filter((s) => s.tags.includes('machine-learning')),
+      snippets: snippets.filter((s) => s.tags.includes('machine-learning' as Tag)),
       gradient: 'from-orange-500 to-red-500',
       description: 'Machine learning algorithms and utilities',
     },
     {
       name: 'Security',
       icon: <Code2 className="h-5 w-5" />,
-      snippets: snippets.filter((s) => s.tags.includes('security')),
+      snippets: snippets.filter((s) => s.tags.includes('security' as Tag)),
       gradient: 'from-indigo-500 to-purple-500',
       description: 'Security-related implementations and utilities',
     },
@@ -141,7 +172,9 @@ export default function ListPage() {
       name: 'Competitive Programming',
       icon: <Code2 className="h-5 w-5" />,
       snippets: snippets.filter((s) => 
-        ['leetcode', 'hackerrank', 'competitive-programming'].some(tag => s.tags.includes(tag))
+        ['leetcode', 'hackerrank', 'competitive-programming'].some((tag) => 
+          s.tags.includes(tag as Tag)
+        )
       ),
       gradient: 'from-pink-500 to-rose-500',
       description: 'Solutions to competitive programming problems',
