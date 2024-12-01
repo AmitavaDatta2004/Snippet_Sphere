@@ -14,13 +14,16 @@ export default function SnippetsPage() {
 
   useEffect(() => {
     hljs.configure({
-      languages: ['cpp', 'csharp', 'c', 'java', 'python', 'javascript', 'typescript', 'html', 'css']
+      languages: ['cpp', 'csharp', 'c', 'java', 'python', 'javascript', 'typescript', 'html', 'css'],
     });
-    
+  
     document.querySelectorAll('pre code').forEach((block) => {
-      hljs.highlightBlock(block);
+      if (block instanceof HTMLElement) {
+        hljs.highlightBlock(block); // Ensure the type is HTMLElement
+      }
     });
   }, [selectedLanguage]);
+  
 
   const filteredSnippets = selectedLanguage
     ? snippets.filter((snippet) => snippet.language === selectedLanguage)
