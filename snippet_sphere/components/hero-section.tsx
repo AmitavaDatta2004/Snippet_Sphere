@@ -168,14 +168,14 @@ function DeveloperCard({ creator, index }) {
             />
           </div>
           <div className="flex-1 text-center sm:text-left">
-            <h3 className="text-2xl font-bold text-white mb-1">{creator.name}</h3>
+            <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-500 mb-1">{creator.name}</h3>
             <p className="text-lg text-purple-200 mb-2">{creator.role}</p>
             <p className="text-sm text-purple-100 mb-4">{creator.bio}</p>
             <div className="flex flex-wrap justify-center sm:justify-start gap-2 mb-4">
               {creator.skills.map((skill, index) => (
                 <span
                   key={index}
-                  className="px-3 py-1 text-xs font-semibold text-purple-800 bg-purple-200 rounded-full"
+                  className="px-3 py-1 text-xs font-semibold text-white bg-gradient-to-br from-purple-600 to-pink-600 rounded-full"
                 >
                   {skill}
                 </span>
