@@ -5,12 +5,12 @@ const contributors = [
   {
     name: 'Amitava Datta',
     github: 'https://github.com/amitavadatta',
-    linkedin: 'https://linkedin.com/in/amitavadatta',
+    linkedin: 'https://www.linkedin.com/in/amitava-datta-301920292/',
   },
   {
     name: 'Pranay De',
     github: 'https://github.com/PRANAY130',
-    linkedin: 'https://linkedin.com/in/pranayde',
+    linkedin: 'https://www.linkedin.com/in/amitava-datta-301920292/',
   },
 ]
 
@@ -61,7 +61,7 @@ export function Footer() {
               Contribute to this project on{' '}
             </span>
             <Link
-              href="https://github.com/amitavadatta/code-showcase"
+              href="https://github.com/AmitavaDatta2004/Snippet_Sphere"
               target="_blank"
               rel="noopener noreferrer"
               className="underline hover:text-yellow-300 dark:hover:text-yellow-400 transition-colors duration-300 font-bold"

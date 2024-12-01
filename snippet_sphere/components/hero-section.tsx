@@ -130,18 +130,18 @@ const creators = [
   {
     name: 'Amitava Datta',
     role: 'Lead Developer',
-    github: 'https://github.com/amitavadatta',
-    linkedin: 'https://linkedin.com/in/amitavadatta',
-    avatar: '/placeholder.svg?height=400&width=400',
+    github: 'https://github.com/AmitavaDatta2004',
+    linkedin: 'https://www.linkedin.com/in/amitava-datta-301920292/',
+    avatar: './collaborators/AmitavaDatta.png',
     bio: 'Passionate about creating elegant and efficient code solutions.',
     skills: ['React', 'Node.js', 'TypeScript', 'GraphQL'],
   },
   {
     name: 'Pranay De',
     role: 'Core Developer',
-    github: 'https://github.com/pranayde',
-    linkedin: 'https://linkedin.com/in/pranayde',
-    avatar: '/placeholder.svg?height=400&width=400',
+    github: 'https://github.com/PRANAY130',
+    linkedin: 'https://www.linkedin.com/in/amitava-datta-301920292/',
+    avatar: './collaborators/PranayDe.jpg',
     bio: 'Dedicated to building robust and scalable applications.',
     skills: ['Python', 'Django', 'Machine Learning', 'AWS'],
   },
@@ -267,7 +267,7 @@ export function HeroSection() {
             >
               <span className="bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent drop-shadow-lg">
                 <Typewriter
-                  words={['Code Showcase', 'Explore Snippets', 'Learn & Share']}
+                  words={['Snippet Sphere', 'Explore Snippets', 'Learn & Share']}
                   loop={true}
                   typingSpeed={100}
                   deletingSpeed={80}
