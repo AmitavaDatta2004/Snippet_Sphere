@@ -54,7 +54,7 @@ export function Footer() {
           <p className="text-lg text-white dark:text-gray-200 mb-4 animate-bounce">
             Made with{' '}
             <Heart className="inline-block h-6 w-6 text-red-300 animate-pulse" />{' '}
-            by the Code Showcase team
+            by the Snippet Sphere team
           </p>
           <p className="text-md text-white dark:text-gray-200">
             <span className="bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent font-semibold">
