@@ -1,13 +1,14 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Code2, Github, Linkedin, ChevronDown } from 'lucide-react'
+import Image from 'next/image'
+import { Code2, Github, Linkedin, ChevronDown, ExternalLink } from 'lucide-react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, Float, Stars } from '@react-three/drei'
 import * as THREE from 'three'
 import { Button } from '@/components/ui/button'
-import { Typewriter } from 'react-simple-typewriter'
+import { motion, useAnimation } from 'framer-motion'
 
 function AnimatedBox() {
   const meshRef = useRef<THREE.Mesh>(null)
@@ -63,7 +64,7 @@ function FloatingCubes() {
           <mesh scale={0.2}>
             <boxGeometry />
             <meshPhongMaterial
-              color={`hsl(${Math.random() * 360}, 70%, 40%)`}
+              color={`hsl(${Math.random() * 360}, 70%, 50%)`}
               opacity={0.7}
               transparent
             />
@@ -74,24 +75,152 @@ function FloatingCubes() {
   )
 }
 
+function Typewriter({ words, loop = true, typingSpeed = 150, deletingSpeed = 100, delayBetweenWords = 1000 }) {
+  const [currentWordIndex, setCurrentWordIndex] = useState(0)
+  const [currentText, setCurrentText] = useState('')
+  const [isDeleting, setIsDeleting] = useState(false)
+  const [isWaiting, setIsWaiting] = useState(false)
+
+  useEffect(() => {
+    let timeout
+
+    const type = () => {
+      const currentWord = words[currentWordIndex]
+      
+      if (isWaiting) {
+        timeout = setTimeout(() => {
+          setIsWaiting(false)
+          setIsDeleting(true)
+        }, delayBetweenWords)
+        return
+      }
+
+      if (isDeleting) {
+        setCurrentText(currentWord.substring(0, currentText.length - 1))
+        if (currentText === '') {
+          setIsDeleting(false)
+          setCurrentWordIndex((prevIndex) => (prevIndex + 1) % words.length)
+          if (currentWordIndex === words.length - 1 && !loop) return
+        }
+      } else {
+        setCurrentText(currentWord.substring(0, currentText.length + 1))
+        if (currentText === currentWord) {
+          setIsWaiting(true)
+        }
+      }
+
+      const typingDelay = isDeleting ? deletingSpeed : typingSpeed
+      timeout = setTimeout(type, typingDelay)
+    }
+
+    timeout = setTimeout(type, 100)
+
+    return () => clearTimeout(timeout)
+  }, [currentText, isDeleting, isWaiting, currentWordIndex, words, loop, typingSpeed, deletingSpeed, delayBetweenWords])
+
+  return (
+    <span className="inline-block min-w-[1ch]">
+      {currentText}
+      <span className="animate-blink">|</span>
+    </span>
+  )
+}
+
 const creators = [
   {
     name: 'Amitava Datta',
     role: 'Lead Developer',
     github: 'https://github.com/amitavadatta',
     linkedin: 'https://linkedin.com/in/amitavadatta',
+    avatar: '/placeholder.svg?height=400&width=400',
+    bio: 'Passionate about creating elegant and efficient code solutions.',
+    skills: ['React', 'Node.js', 'TypeScript', 'GraphQL'],
   },
   {
     name: 'Pranay De',
     role: 'Core Developer',
     github: 'https://github.com/pranayde',
     linkedin: 'https://linkedin.com/in/pranayde',
+    avatar: '/placeholder.svg?height=400&width=400',
+    bio: 'Dedicated to building robust and scalable applications.',
+    skills: ['Python', 'Django', 'Machine Learning', 'AWS'],
   },
 ]
 
-export function HeroSection() {
+function DeveloperCard({ creator, index }) {
   return (
-    <div className="relative h-[calc(100vh-4rem)] w-full overflow-hidden bg-gradient-to-b from-gray-50 via-gray-100 to-gray-200 dark:from-gray-900 dark:via-purple-900/30 dark:to-violet-950/50">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.8 + index * 0.2 }}
+      className="group relative overflow-hidden rounded-xl bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all hover:shadow-xl"
+    >
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-pink-600/20 opacity-0 transition-opacity group-hover:opacity-100" />
+      <div className="relative z-10 p-6">
+        <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
+          <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-purple-400 shadow-lg transform transition-transform group-hover:scale-110">
+            <Image
+              src={creator.avatar}
+              alt={creator.name}
+              layout="fill"
+              objectFit="cover"
+              className="transition-transform group-hover:scale-110"
+            />
+          </div>
+          <div className="flex-1 text-center sm:text-left">
+            <h3 className="text-2xl font-bold text-white mb-1">{creator.name}</h3>
+            <p className="text-lg text-purple-200 mb-2">{creator.role}</p>
+            <p className="text-sm text-purple-100 mb-4">{creator.bio}</p>
+            <div className="flex flex-wrap justify-center sm:justify-start gap-2 mb-4">
+              {creator.skills.map((skill, index) => (
+                <span
+                  key={index}
+                  className="px-3 py-1 text-xs font-semibold text-purple-800 bg-purple-200 rounded-full"
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="mt-6 flex justify-center sm:justify-start space-x-4">
+          <a
+            href={creator.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-purple-300 hover:text-white transition-colors"
+          >
+            <Github className="h-6 w-6" />
+          </a>
+          <a
+            href={creator.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-purple-300 hover:text-white transition-colors"
+          >
+            <Linkedin className="h-6 w-6" />
+          </a>
+          <a
+            href={`mailto:${creator.name.toLowerCase().replace(' ', '.')}@example.com`}
+            className="text-purple-300 hover:text-white transition-colors"
+          >
+            <ExternalLink className="h-6 w-6" />
+          </a>
+        </div>
+      </div>
+    </motion.div>
+  )
+}
+
+export function HeroSection() {
+  const controls = useAnimation()
+
+  useEffect(() => {
+    controls.start({ opacity: 1, y: 0 })
+  }, [controls])
+
+  return (
+    <div className="relative min-h-screen w-full overflow-hidden bg-gradient-to-b from-purple-900 via-indigo-900 to-blue-900 dark:from-gray-900 dark:via-purple-900/30 dark:to-violet-950/50">
       <div className="absolute inset-0">
         <Canvas
           camera={{ position: [0, 0, 8], fov: 75 }}
@@ -111,7 +240,7 @@ export function HeroSection() {
           <Stars
             radius={50}
             depth={50}
-            count={1000}
+            count={5000}
             factor={4}
             saturation={0.5}
             fade
@@ -127,82 +256,91 @@ export function HeroSection() {
           />
         </Canvas>
       </div>
-      <div className="relative z-10 flex h-full items-center justify-center">
+      <div className="relative z-10 flex min-h-screen items-center justify-center">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
-            <h1 className="mb-6 text-4xl font-bold text-gray-900 dark:text-white sm:text-6xl lg:text-7xl">
-              <span className="bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-500 bg-clip-text text-transparent">
+          <div className="mx-auto max-w-5xl text-center">
+            <motion.h1 
+              initial={{ opacity: 0, y: -20 }}
+              animate={controls}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="mb-6 text-5xl font-extrabold text-white sm:text-7xl lg:text-8xl"
+            >
+              <span className="bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent drop-shadow-lg">
                 <Typewriter
-                  words={['Code Showcase']}
-                  loop={1}
-                  cursor
-                  cursorStyle="_"
-                  typeSpeed={70}
-                  deleteSpeed={50}
+                  words={['Code Showcase', 'Explore Snippets', 'Learn & Share']}
+                  loop={true}
+                  typingSpeed={100}
+                  deletingSpeed={80}
+                  delayBetweenWords={2000}
                 />
               </span>
-            </h1>
-            <p className="mb-8 text-lg text-gray-700 dark:text-gray-300 sm:text-xl lg:text-2xl">
+            </motion.h1>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={controls}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="mb-8 text-xl text-purple-200 sm:text-2xl lg:text-3xl"
+            >
               <Typewriter
                 words={[
                   'A beautiful collection of code snippets and programs.',
                   'Browse, search, and copy code with ease.',
+                  'Contribute and learn from the community.',
                 ]}
-                loop={1}
-                cursor
-                cursorStyle="_"
-                typeSpeed={50}
-                deleteSpeed={30}
+                loop={true}
+                typingSpeed={50}
+                deletingSpeed={30}
+                delayBetweenWords={3000}
               />
-            </p>
-            <div className="mb-12 flex justify-center space-x-4">
+            </motion.p>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={controls}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="mb-16 flex justify-center space-x-4"
+            >
               <Button
                 asChild
                 size="lg"
-                className="bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 dark:from-purple-500 dark:to-pink-500 dark:hover:from-purple-600 dark:hover:to-pink-600 transition-all transform hover:scale-105"
+                className="bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 dark:from-purple-500 dark:to-pink-500 dark:hover:from-purple-600 dark:hover:to-pink-600 transition-all transform hover:scale-105 hover:shadow-lg"
               >
                 <Link href="/snippets">
                   <Code2 className="mr-2 h-5 w-5" />
                   Browse Snippets
                 </Link>
               </Button>
-            </div>
+            </motion.div>
 
-            <div className="mt-12 grid gap-8 rounded-lg border border-gray-200 bg-white/50 p-6 backdrop-blur-sm sm:grid-cols-2 dark:border-purple-500/30 dark:bg-purple-950/30">
-              {creators.map((creator) => (
-                <div
-                  key={creator.name}
-                  className="flex flex-col items-center space-y-2 rounded-lg bg-gray-100/50 p-4 backdrop-blur-sm hover:bg-gray-200/50 transition-all hover:shadow-lg dark:bg-purple-900/50 dark:hover:bg-purple-800/50"
-                >
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{creator.name}</h3>
-                  <p className="text-sm text-gray-600 dark:text-purple-200">{creator.role}</p>
-                  <div className="flex space-x-4 mt-2">
-                    <Link
-                      href={creator.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-600 hover:text-gray-900 transition-colors dark:text-purple-300 dark:hover:text-white"
-                    >
-                      <Github className="h-5 w-5" />
-                    </Link>
-                    <Link
-                      href={creator.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-600 hover:text-gray-900 transition-colors dark:text-purple-300 dark:hover:text-white"
-                    >
-                      <Linkedin className="h-5 w-5" />
-                    </Link>
-                  </div>
-                </div>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={controls}
+              transition={{ duration: 0.8, delay: 0.7 }}
+              className="text-3xl font-bold text-white mb-8"
+            >
+              Meet Our Developers
+            </motion.h2>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={controls}
+              transition={{ duration: 0.8, delay: 0.8 }}
+              className="grid gap-8 sm:grid-cols-2"
+            >
+              {creators.map((creator, index) => (
+                <DeveloperCard key={creator.name} creator={creator} index={index} />
               ))}
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <ChevronDown className="h-8 w-8 text-gray-600 dark:text-white opacity-50" />
-      </div>
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={controls}
+        transition={{ duration: 0.8, delay: 1 }}
+        className="absolute bottom-4 left-1/2 transform -translate-x-1/2 animate-bounce"
+      >
+        <ChevronDown className="h-8 w-8 text-white opacity-50" />
+      </motion.div>
     </div>
   )
 }
