@@ -135,6 +135,7 @@ const creators = [
     avatar: './collaborators/AmitavaDatta.png',
     bio: 'Passionate about creating elegant and efficient code solutions.',
     skills: ['React', 'Node.js', 'TypeScript', 'GraphQL'],
+    mail : 'dattaamitava2004@gmail.com'
   },
   {
     name: 'Pranay De',
@@ -144,6 +145,7 @@ const creators = [
     avatar: './collaborators/PranayDe.jpg',
     bio: 'Dedicated to building robust and scalable applications.',
     skills: ['Python', 'Django', 'Machine Learning', 'AWS'],
+    mail : 'pranayde201@gmail.com'
   },
 ]
 
@@ -201,7 +203,7 @@ function DeveloperCard({ creator, index }) {
             <Linkedin className="h-6 w-6" />
           </a>
           <a
-            href={`mailto:${creator.name.toLowerCase().replace(' ', '.')}@example.com`}
+            href={`mailto:${creator.mail}`}
             className="text-purple-300 hover:text-white transition-colors"
           >
             <ExternalLink className="h-6 w-6" />

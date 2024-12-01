@@ -9,7 +9,7 @@ import { Toaster } from '@/components/ui/sonner';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Code Showcase',
+  title: 'Snippet Sphere',
   description: 'A beautiful collection of code snippets and programs',
 };
 
