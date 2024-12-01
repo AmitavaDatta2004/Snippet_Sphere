@@ -1,7 +1,7 @@
 'use client';
 
 import { snippets } from '@/lib/snippets';
-import { Code2, ChevronDown, ChevronUp } from 'lucide-react';
+import { Code2, ChevronDown, ChevronUp, Zap, Database, Globe, Brain, Shield, Trophy } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/github-dark.css';
@@ -63,32 +63,32 @@ function SnippetCard({ snippet, categoryIndex, snippetIndex }: SnippetCardProps)
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: (categoryIndex + snippetIndex) * 0.1 }}
     >
-      <div className="group rounded-lg border bg-card/50 p-4 transition-all hover:bg-accent">
+      <div className="group rounded-lg bg-gray-50 dark:bg-gray-700 p-4 transition-all hover:bg-gray-100 dark:hover:bg-gray-600">
         <div
           className="flex cursor-pointer items-center justify-between"
           onClick={() => setIsExpanded(!isExpanded)}
         >
           <div className="flex items-center space-x-2">
-            <Code2 className="h-4 w-4" />
-            <span className="font-medium">{snippet.title}</span>
+            <Code2 className="h-5 w-5 text-indigo-500 dark:text-indigo-400" />
+            <span className="font-medium text-gray-800 dark:text-gray-200">{snippet.title}</span>
           </div>
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
-              <span className="text-sm text-muted-foreground">
+              <span className="text-sm text-gray-600 dark:text-gray-300">
                 {snippet.language}
               </span>
-              <span className="text-sm text-muted-foreground">
+              <span className="text-sm text-gray-500 dark:text-gray-400">
                 {snippet.author.name}
               </span>
             </div>
             {isExpanded ? (
-              <ChevronUp className="h-4 w-4 text-muted-foreground" />
+              <ChevronUp className="h-5 w-5 text-gray-500 dark:text-gray-400" />
             ) : (
-              <ChevronDown className="h-4 w-4 text-muted-foreground" />
+              <ChevronDown className="h-5 w-5 text-gray-500 dark:text-gray-400" />
             )}
           </div>
         </div>
-        <p className="mt-1 text-sm text-muted-foreground">
+        <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
           {snippet.description}
         </p>
         <AnimatePresence>
@@ -100,8 +100,8 @@ function SnippetCard({ snippet, categoryIndex, snippetIndex }: SnippetCardProps)
               transition={{ duration: 0.2 }}
               className="overflow-hidden"
             >
-              <pre className="mt-4 overflow-x-auto rounded-lg bg-muted p-4">
-                <code className={`language-${snippet.language}`}>
+              <pre className="mt-4 overflow-x-auto rounded-lg bg-gray-800 p-4">
+                <code className={`language-${snippet.language} text-sm`}>
                   {snippet.code}
                 </code>
               </pre>
@@ -109,7 +109,7 @@ function SnippetCard({ snippet, categoryIndex, snippetIndex }: SnippetCardProps)
                 {snippet.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full bg-secondary px-2 py-1 text-xs text-secondary-foreground"
+                    className="rounded-full bg-indigo-100 dark:bg-indigo-900 px-3 py-1 text-xs font-medium text-indigo-800 dark:text-indigo-200"
                   >
                     {tag}
                   </span>
@@ -127,18 +127,18 @@ export default function ListPage() {
   const categories: Category[] = [
     {
       name: 'Algorithms',
-      icon: <Code2 className="h-5 w-5" />,
+      icon: <Zap className="h-6 w-6" />,
       snippets: snippets.filter((s) => 
         ['sorting', 'searching', 'graph', 'dynamic-programming', 'greedy'].some((tag) => 
-          s.tags.includes(tag as Tag) // Ensure tag is treated as a 'Tag'
+          s.tags.includes(tag as Tag)
         )
       ),
-      gradient: 'from-blue-500 to-cyan-500',
+      gradient: 'from-yellow-400 to-orange-500',
       description: 'Collection of algorithm implementations and problem solutions',
     },
     {
       name: 'Data Structures',
-      icon: <Code2 className="h-5 w-5" />,
+      icon: <Database className="h-6 w-6" />,
       snippets: snippets.filter((s) => 
         ['array', 'linked-list', 'stack', 'queue', 'tree', 'graph'].some((tag) => 
           s.tags.includes(tag as Tag)
@@ -149,46 +149,46 @@ export default function ListPage() {
     },
     {
       name: 'Web Development',
-      icon: <Code2 className="h-5 w-5" />,
+      icon: <Globe className="h-6 w-6" />,
       snippets: snippets.filter((s) => s.tags.includes('web' as Tag)),
-      gradient: 'from-green-500 to-emerald-500',
+      gradient: 'from-green-400 to-teal-500',
       description: 'Web development utilities and components',
     },
     {
       name: 'Machine Learning',
-      icon: <Code2 className="h-5 w-5" />,
+      icon: <Brain className="h-6 w-6" />,
       snippets: snippets.filter((s) => s.tags.includes('machine-learning' as Tag)),
-      gradient: 'from-orange-500 to-red-500',
+      gradient: 'from-blue-400 to-indigo-500',
       description: 'Machine learning algorithms and utilities',
     },
     {
       name: 'Security',
-      icon: <Code2 className="h-5 w-5" />,
+      icon: <Shield className="h-6 w-6" />,
       snippets: snippets.filter((s) => s.tags.includes('security' as Tag)),
-      gradient: 'from-indigo-500 to-purple-500',
+      gradient: 'from-red-500 to-pink-500',
       description: 'Security-related implementations and utilities',
     },
     {
       name: 'Competitive Programming',
-      icon: <Code2 className="h-5 w-5" />,
+      icon: <Trophy className="h-6 w-6" />,
       snippets: snippets.filter((s) => 
         ['leetcode', 'hackerrank', 'competitive-programming'].some((tag) => 
           s.tags.includes(tag as Tag)
         )
       ),
-      gradient: 'from-pink-500 to-rose-500',
+      gradient: 'from-cyan-400 to-blue-500',
       description: 'Solutions to competitive programming problems',
     },
   ];
 
   return (
-    <div className="container py-8">
+    <div className="container py-8 px-4 sm:px-6 lg:px-8">
       <motion.h1
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mb-8 bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-3xl font-bold text-transparent"
+        className="mb-8 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-4xl sm:text-5xl font-bold text-transparent text-center"
       >
-        Browse by Category
+        Code Snippet Explorer
       </motion.h1>
 
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -198,15 +198,15 @@ export default function ListPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: categoryIndex * 0.1 }}
-            className="rounded-lg border bg-card p-6 transition-all hover:shadow-lg"
+            className="rounded-xl border bg-white dark:bg-gray-800 p-6 transition-all hover:shadow-xl hover:scale-105"
           >
-            <div className="mb-4 flex items-center space-x-2">
-              <div className={`rounded-lg bg-gradient-to-br ${category.gradient} p-2 text-white`}>
+            <div className="mb-4 flex items-center space-x-3">
+              <div className={`rounded-lg bg-gradient-to-br ${category.gradient} p-3 text-white`}>
                 {category.icon}
               </div>
               <div>
-                <h2 className="text-xl font-semibold">{category.name}</h2>
-                <p className="text-sm text-muted-foreground">{category.description}</p>
+                <h2 className="text-2xl font-semibold bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent">{category.name}</h2>
+                <p className="text-sm text-gray-600 dark:text-gray-300">{category.description}</p>
               </div>
             </div>
             <div className="space-y-3">
@@ -219,7 +219,7 @@ export default function ListPage() {
                 />
               ))}
               {category.snippets.length === 0 && (
-                <p className="text-center text-sm text-muted-foreground">
+                <p className="text-center text-sm text-gray-500 dark:text-gray-400 italic">
                   No snippets in this category yet
                 </p>
               )}
@@ -230,3 +230,4 @@ export default function ListPage() {
     </div>
   );
 }
+
