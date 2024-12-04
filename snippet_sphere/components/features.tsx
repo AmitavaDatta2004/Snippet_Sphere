@@ -58,21 +58,23 @@ export function Features() {
           Innovative Features
         </motion.h2>
         <LayoutGroup>
-          <motion.div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4" layout>
+          <motion.div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-4" layout>
             {features.map((feature, index) => {
               const Icon = feature.icon
               const isExpanded = expandedFeature === index
               return (
                 <motion.div
                   key={feature.title}
-                  className={`group relative overflow-hidden rounded-2xl border bg-card/50 p-6 backdrop-blur-sm transition-all duration-300 hover:bg-card/80 hover:shadow-xl ${isExpanded ? 'sm:col-span-2 lg:col-span-2 cursor-default' : 'cursor-pointer'}`}
+                  className={`group relative overflow-hidden rounded-2xl border bg-card/50 p-6 ${isExpanded ? 'md:col-span-2 lg:col-span-4 p-8 cursor-default' : 'cursor-pointer'} backdrop-blur-sm transition-all duration-300 hover:bg-card/80 hover:shadow-xl`}
                   onClick={() => setExpandedFeature(isExpanded ? null : index)}
                   layout
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{
-                    layout: { duration: 0.3, ease: "easeOut" },
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 30
+                    layout: { duration: 0.5, type: "spring", damping: 30, stiffness: 200 },
+                    opacity: { duration: 0.3 },
+                    y: { duration: 0.3 },
+                    delay: index * 0.1,
                   }}
                   whileHover={isExpanded ? {} : { scale: 1.05 }}
                 >
@@ -80,10 +82,9 @@ export function Features() {
                     className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-20 transition-opacity duration-300 group-hover:opacity-40`}
                     layoutId={`gradient-${index}`}
                   />
-                  <div className="h-full flex flex-col">
+                  <div className="h-full flex flex-col transition-all duration-500">
                     <motion.div
                       className={`mb-6 inline-block rounded-xl bg-gradient-to-br ${feature.gradient} p-3 text-white shadow-lg transition-all duration-300 group-hover:shadow-2xl`}
-                      // whileHover={{ rotate: 12, scale: 1.1 }}
                       layout="position"
                     >
                       <Icon className="h-8 w-8" />
@@ -94,19 +95,19 @@ export function Features() {
                     >
                       {feature.title}
                     </motion.h3>
-                    <AnimatePresence mode="wait">
+                    <AnimatePresence>
                       {isExpanded ? (
                         <motion.div
                           key="details"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.3 }}
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3, height: { duration: 0.4 } }}
                         >
                           <p className="text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-300 mb-4">
                             {feature.details}
                           </p>
-                          <div className="grid grid-cols-2 gap-4 mt-4">
+                          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
                             {Object.entries(feature.stats).map(([key, value]) => (
                               <div key={key} className="bg-background/50 p-2 rounded-lg text-center">
                                 <div className="text-lg font-semibold text-primary">{value}</div>
@@ -118,10 +119,10 @@ export function Features() {
                       ) : (
                         <motion.p
                           key="description"
+                          initial={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3, height: { duration: 0.4 } }}
                           className="text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-300"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
                         >
                           {feature.description}
                         </motion.p>
