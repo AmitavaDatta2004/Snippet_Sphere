@@ -316,7 +316,7 @@ export default function SearchPage() {
               
               <Button
                 className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-lg py-3 px-6 rounded-full hover:from-purple-700 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105"
-                onClick={() => window.open('https://github.com/amitavadatta/code-showcase', '_blank')}
+                onClick={() => window.open('https://github.com/AmitavaDatta2004/Snippet_Sphere', '_blank')}
               >
                 <Github className="mr-2 h-5 w-5" />
                 Contribute on GitHub
