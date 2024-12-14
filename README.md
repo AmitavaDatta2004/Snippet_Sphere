@@ -1,4 +1,4 @@
-# Code Showcase
+# Snippet Sphere
 
 A beautiful collection of code snippets and programs for developers. Browse, search, and learn from a curated collection of programming examples across multiple languages and categories.
 
